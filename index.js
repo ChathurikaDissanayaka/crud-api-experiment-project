@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import productRoute from "./routes/product.route.js";
 import logger from "./config/logger.js";
+import requestLogger from './middleware/requestLogger.js';  
 
 const PORT = process.env.PORT || 4000;
 const MONGO_DB_URL = process.env.MONGO_DB_URL;
@@ -11,6 +12,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(requestLogger);
 
 // Routes
 app.use("/api/products", productRoute);
