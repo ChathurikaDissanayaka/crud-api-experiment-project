@@ -31,5 +31,5 @@ mongoose
   })
   .catch((err) => {
     logger.error("Database connection failed.");
-    console.error(err);
+    console.log(err);
   });
