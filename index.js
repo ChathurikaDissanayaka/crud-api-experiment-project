@@ -1,8 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import productRoute from "./routes/product.route.js";
+import cors from "cors";
 import logger from "./config/logger.js";
-import requestLogger from './middleware/requestLogger.js';  
+import requestLogger from "./middleware/requestLogger.js";
 
 const PORT = process.env.PORT || 4000;
 const MONGO_DB_URL = process.env.MONGO_DB_URL;
@@ -12,6 +13,14 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: process.env.FRONTEND_URL,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type"],
+//   })
+// );
 app.use(requestLogger);
 
 // Routes
