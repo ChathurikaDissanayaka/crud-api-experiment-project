@@ -24,7 +24,7 @@ mongoose
   .then(() => {
     logger.info("Database connected.");
     app.listen(PORT, () => {
-      logger.info(`Server running on port ${PORT}`);
+      logger.info(`Server running on port: ${PORT}`);
     });
   })
   .catch((err) => {
