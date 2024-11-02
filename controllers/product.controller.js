@@ -18,8 +18,10 @@ export const getProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findById(id);
+    logger.info('Fetched product successfully');
     res.status(200).json(product);
   } catch (error) {
+    logger.error('Error fetching product: ' + error.message);
     res.status(500).json({ message: error.message });
   }
 };
@@ -28,8 +30,10 @@ export const getProduct = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const product = await Product.create(req.body);
+    logger.info('Added product successfully');
     res.status(200).json(product);
   } catch (error) {
+    logger.error('Error adding product: ' + error.message);
     res.status(500).json({ message: error.message });
   }
 };
@@ -40,11 +44,14 @@ export const updateProduct = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findByIdAndUpdate(id, req.body);
     if (!product) {
+      logger.error('Error fetching product: ' + error.message);
       return res.status(404).json({ message: "Product not found" });
     }
     const updatedProduct = await Product.findById(id);
+    logger.info('Updated product successfully');
     res.status(200).json(updatedProduct);
   } catch (error) {
+    logger.error('Error updating product: ' + error.message);
     res.status(500).json({ message: error.message });
   }
 };
@@ -55,10 +62,13 @@ export const deleteProduct = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findByIdAndDelete(id);
     if (!product) {
+      logger.error('Error fetching product: ' + error.message);
       return res.status(404).json({ message: "Product not found" });
     }
+    logger.info('Deleted product successfully');
     res.status(200).json({ message: "Product deleted successfully." });
   } catch (error) {
+    logger.error('Error deleting product: ' + error.message);
     res.status(500).json({ message: error.message });
   }
 };
