@@ -22,12 +22,12 @@ app.get("/", (req, res) => {
 mongoose
   .connect(MONGO_DB_URL)
   .then(() => {
-    logger.info('Database connected.')
+    logger.info("Database connected.");
     app.listen(PORT, () => {
       logger.info(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => {
-    console.log("Database connection failed.");
+    logger.error("Database connection failed.");
     console.error(err);
   });
